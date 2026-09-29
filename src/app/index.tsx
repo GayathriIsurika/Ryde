@@ -1,5 +1,5 @@
 import * as Device from 'expo-device';
-import { Platform, StyleSheet } from 'react-native';
+import { Platform, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { AnimatedIcon } from '@/components/animated-icon';
@@ -30,34 +30,20 @@ function getDevMenuHint() {
 
 export default function HomeScreen() {
   return (
-    <ThemedView style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
-        <ThemedView style={styles.heroSection}>
-          <AnimatedIcon />
-          <ThemedText type="title" style={styles.title}>
-            Welcome to&nbsp;Expo
-          </ThemedText>
-        </ThemedView>
-
-        <ThemedText type="code" style={styles.code}>
-          get started
-        </ThemedText>
-
-        <ThemedView type="backgroundElement" style={styles.stepContainer}>
-          <HintRow
-            title="Try editing"
-            hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
-          />
-          <HintRow title="Dev tools" hint={getDevMenuHint()} />
-          <HintRow
-            title="Fresh start"
-            hint={<ThemedText type="code">npm run reset-project</ThemedText>}
-          />
-        </ThemedView>
-
-        {Platform.OS === 'web' && <WebBadge />}
+        <Image
+          source={require('@/assets/OnboardImage1.jpg')}
+          style={styles.onboardimage}
+        />
+        <Image
+          source={require('@/assets/RydeLogo.png')}
+          style={styles.image}
+        />
+        <Text style={styles.title}>Your Ride, Just a Tap Away</Text>
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>Get Started</Text>
+        </TouchableOpacity>
       </SafeAreaView>
-    </ThemedView>
   );
 }
 
@@ -71,9 +57,29 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: Spacing.four,
     alignItems: 'center',
-    gap: Spacing.three,
-    paddingBottom: BottomTabInset + Spacing.three,
-    maxWidth: MaxContentWidth,
+    backgroundColor: 'white',
+  },
+  image: {
+    width: 200,
+    height: 200,
+    resizeMode: 'contain',
+    marginTop: -25,
+  },
+  onboardimage: {
+    width: 800,
+    height: 400,
+    resizeMode: 'contain',
+  },
+  button: {
+    borderRadius: 20,
+    backgroundColor: '#c1f819',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    marginTop: 20,
+  },
+  buttonText: {
+    color: 'black',
+    fontSize: 16,
   },
   heroSection: {
     alignItems: 'center',
@@ -84,6 +90,10 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: 'center',
+    fontSize: 25,
+    fontWeight: 'bold',
+    fontFamily: 'Inter_900Black',
+    marginTop: -20,
   },
   code: {
     textTransform: 'uppercase',
