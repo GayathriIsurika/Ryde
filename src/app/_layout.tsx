@@ -12,6 +12,7 @@ export default function RootLayout() {
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="details" options={{ title: 'Details' }} />
+        <Stack.Screen name="otp" options={{ title: 'Verification' }} />
       </Stack>
     </>
   );
