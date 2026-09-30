@@ -8,6 +8,7 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { WebBadge } from '@/components/web-badge';
 import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
+import { router } from 'expo-router';
 
 function getDevMenuHint() {
   if (Platform.OS === 'web') {
@@ -40,7 +41,7 @@ export default function HomeScreen() {
           style={styles.image}
         />
         <Text style={styles.title}>Your Ride, Just a Tap Away</Text>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={() => router.push('/details')}>
           <Text style={styles.buttonText}>Get Started</Text>
         </TouchableOpacity>
       </SafeAreaView>
