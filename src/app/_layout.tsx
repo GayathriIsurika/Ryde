@@ -1,14 +1,18 @@
 import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
+import { StyleSheet, View } from 'react-native';
+import {useState} from 'react'
+import { useFonts, NunitoSans_700Bold } from '@expo-google-fonts/nunito-sans';
 
-import { AnimatedSplashOverlay } from '@/components/animated-icon';
-
-SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
+
+  const [fontsLoaded] = useFonts({
+    NunitoSans_700Bold,
+  })
+
+  
   return (
-    <>
-      <AnimatedSplashOverlay />
+    <>     
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="details" options={{ title: 'Details' }} />
