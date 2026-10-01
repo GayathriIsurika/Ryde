@@ -67,3 +67,4 @@ const styles = StyleSheet.create({
   disabledButton: { opacity: 0.5 },
   buttonText: { color: '#111', fontSize: 16, fontWeight: '600' },
 });
+
