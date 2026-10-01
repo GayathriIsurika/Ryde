@@ -1,73 +1,341 @@
-import { Ionicons } from '@expo/vector-icons';
-import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import React from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  TouchableOpacity,
+  Dimensions,
+  Image,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Ionicons } from '@expo/vector-icons';
 
-const services = [
-  { label: 'Rides', icon: 'car-sport' as const },
-  { label: 'Food', icon: 'fast-food' as const },
-  { label: 'Market', icon: 'cart' as const },
-  { label: 'Explore', icon: 'calendar' as const, badge: 'New' },
-  { label: 'Rentals', icon: 'time' as const },
-  { label: 'Delivery', icon: 'cube' as const, badge: 'Flash' },
-  { label: 'Trucks', icon: 'bus' as const },
-  { label: "Scan N' Go", icon: 'scan' as const },
+const { width } = Dimensions.get('window');
+
+interface ServiceItem {
+  id: string;
+  label: string;
+  subtitle: string;
+  icon: keyof typeof Ionicons.glyphMap;
+  iconColor: string;
+  bgColor: string;
+  badge?: string;
+}
+
+const SERVICES: ServiceItem[] = [
+  {
+    id: 'rides',
+    label: 'Rides',
+    subtitle: 'Quick & Safe',
+    icon: 'car-sport',
+    iconColor: '#76ca00',
+    bgColor: '#f1fada',
+  },
+  {
+    id: 'food',
+    label: 'Food',
+    subtitle: 'Your Favourite Food',
+    icon: 'fast-food',
+    iconColor: '#00a389',
+    bgColor: '#e3f8f5',
+  },
+  {
+    id: 'market',
+    label: 'Market',
+    subtitle: 'Groceries & More',
+    icon: 'cart',
+    iconColor: '#5a4fce',
+    bgColor: '#eeedfe',
+  },
+  {
+    id: 'explore',
+    label: 'Explore',
+    subtitle: 'Places & Activities',
+    icon: 'calendar',
+    iconColor: '#2d804e',
+    bgColor: '#fff2e5',
+    badge: 'New',
+  },
+  {
+    id: 'rentals',
+    label: 'Rentals',
+    subtitle: 'Cars, Bikes & More',
+    icon: 'time',
+    iconColor: '#008080',
+    bgColor: '#e7f7f7',
+  },
+  {
+    id: 'delivery',
+    label: 'Delivery',
+    subtitle: 'Send Anything',
+    icon: 'cube',
+    iconColor: '#32a852',
+    bgColor: '#e5f8ec',
+    badge: 'Flash',
+  },
+  {
+    id: 'trucks',
+    label: 'Trucks',
+    subtitle: 'Heavy Loads',
+    icon: 'bus',
+    iconColor: '#177e89',
+    bgColor: '#ebf6f7',
+  },
+  {
+    id: 'scan',
+    label: "Scan N' Go",
+    subtitle: 'Scan & Ride/Order',
+    icon: 'scan',
+    iconColor: '#0f766e',
+    bgColor: '#e6f7f5',
+  },
 ];
 
 export default function HomeScreen() {
   return (
     <SafeAreaView style={styles.safeArea} edges={['top']}>
-      <View style={styles.header}>
-        <View>
-          <Text style={styles.greeting}>Hi Gayathri Isurika,</Text>
-          <Text style={styles.greeting}>Good Morning!</Text>
-        </View>
-      </View>
-      <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
-        <View style={styles.services}>
-          {services.map((service) => (
-            <TouchableOpacity key={service.label} style={styles.service} activeOpacity={0.75}>
-              <View style={styles.serviceIconBox}>
-                <Ionicons name={service.icon} size={38} color="#008080" />
-                {service.badge && <Text style={styles.serviceBadge}>{service.badge}</Text>}
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.scrollContainer}
+      >
+        {/* Header Container */}
+        <View style={styles.headerContainer}>
+
+          {/* Main Header Content */}
+          <View style={styles.headerMainContent}>
+            {/* Left side greetings */}
+            <View style={styles.greetingWrapper}>
+              <View>
+                <Ionicons name="sunny-outline" size={20} color="#1c2a05" />
               </View>
-              <Text style={styles.serviceLabel}>{service.label}</Text>
+              <Text style={styles.greetingTitle}>Hi Gayathri Isurika,</Text>
+              <View style={styles.subGreetingRow}>
+                <Text style={styles.greetingSubtitle}>Good Morning!</Text>
+              </View>
+              <Text style={styles.tagline}>Ride. Deliver. Explore. All in one place.</Text>
+            </View>
+
+            {/* Top Right Corner Image Artwork */}
+            <Image
+              source={require('@/assets/hero-banner.png')}
+              style={styles.headerCornerImage}
+              resizeMode="contain"
+            />
+          </View>
+        </View>
+
+        {/* Floating Search Bar */}
+        <View style={styles.searchCard}>
+          <View style={styles.searchLeftIcon}>
+            <Ionicons name="location" size={22} color="#76ca00" />
+          </View>
+          <View style={styles.searchTextContainer}>
+            <Text style={styles.searchTitle}>Where are you going?</Text>
+            <Text style={styles.searchSubTitle}>Set your pickup and drop location</Text>
+          </View>
+          <TouchableOpacity style={styles.searchArrowBtn} activeOpacity={0.85}>
+            <Ionicons name="arrow-forward" size={20} color="#1c2a05" />
+          </TouchableOpacity>
+        </View>
+
+        {/* Services Grid */}
+        <View style={styles.servicesGrid}>
+          {SERVICES.map((item) => (
+            <TouchableOpacity key={item.id} style={styles.serviceCard} activeOpacity={0.8}>
+              <View style={[styles.iconBox, { backgroundColor: item.bgColor }]}>
+                {item.badge && (
+                  <View style={styles.badgeContainer}>
+                    <Text style={styles.badgeText}>{item.badge}</Text>
+                  </View>
+                )}
+                <Ionicons name={item.icon} size={32} color={item.iconColor} />
+              </View>
+
+              <View style={styles.serviceTitleRow}>
+                <Text style={styles.serviceLabel} numberOfLines={1}>
+                  {item.label}
+                </Text>
+                <Ionicons name="chevron-forward" size={12} color="#a6b1c2" />
+              </View>
+
+              <Text style={styles.serviceSubtitle} numberOfLines={1}>
+                {item.subtitle}
+              </Text>
             </TouchableOpacity>
           ))}
         </View>
-        <View style={styles.searchBox}>
-          <TextInput placeholder="Where are you going?" placeholderTextColor="#999" style={styles.searchInput} />
-          <Ionicons name="search" size={28} color="#aeb2bb" />
-        </View>
+
       </ScrollView>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  safeArea: { flex: 1, backgroundColor: '#fff' },
-  header: { minHeight: 138, backgroundColor: '#c1f819', paddingHorizontal: 24, paddingTop: 20, paddingBottom: 30, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
-  greeting: { color: '#242321', fontSize: 20, lineHeight: 27, fontWeight: '500' },
-  scrollContent: { paddingHorizontal: 22, paddingBottom: 20 },
-  services: { marginTop: 12, marginBottom: 28, flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' },
-  service: { width: '23%', alignItems: 'center', marginTop: 20 },
-  serviceIconBox: { width: '100%', aspectRatio: 1, borderRadius: 17, backgroundColor: '#f0f1f3', alignItems: 'center', justifyContent: 'center' },
-  serviceBadge: { position: 'absolute', top: -9, right: -4, overflow: 'hidden', backgroundColor: '#ef1717', color: '#fff', borderRadius: 12, paddingHorizontal: 7, paddingVertical: 3, fontSize: 11, fontWeight: '600' },
-  serviceLabel: { color: '#555', fontSize: 15, marginTop: 10, textAlign: 'center' },
-  searchBox: { height: 62, borderRadius: 14, backgroundColor: '#f4f4f4', paddingHorizontal: 18, flexDirection: 'row', alignItems: 'center', marginBottom: 30 },
-  searchInput: { flex: 1, fontSize: 18, color: '#222' },
-  eventCard: { borderRadius: 16, overflow: 'hidden', backgroundColor: '#f5f5f5', marginBottom: 16 },
-  eventArtwork: { height: 195, backgroundColor: '#71c5e9', paddingHorizontal: 14, paddingTop: 18, alignItems: 'center', justifyContent: 'space-between' },
-  eventEyebrow: { fontSize: 8, fontWeight: '700', color: '#12364c', letterSpacing: 1 },
-  eventTitle: { color: '#082846', fontSize: 27, fontWeight: '900', letterSpacing: 1, textShadowColor: '#fff', textShadowRadius: 5 },
-  eventDetails: { fontSize: 8, color: '#12364c', fontWeight: '700' },
-  eventPeople: { position: 'absolute', top: 52, height: 95, left: 0, right: 0, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly', opacity: 0.75 },
-  ticketLine: { color: '#141414', backgroundColor: 'rgba(255,255,255,0.85)', alignSelf: 'stretch', textAlign: 'center', paddingVertical: 8, fontSize: 11, fontWeight: '800' },
-  eventCopy: { padding: 18 },
-  eventHeading: { color: '#222', fontSize: 19, fontWeight: '700', marginBottom: 7 },
-  eventDescription: { color: '#666', fontSize: 16, lineHeight: 23 },
-  exploreLink: { textAlign: 'right', color: '#555', marginTop: 8 },
-  bottomNav: { height: 76, borderTopWidth: StyleSheet.hairlineWidth, borderTopColor: '#eee', backgroundColor: '#fff', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' },
-  navItem: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 4 },
-  navLabel: { color: '#64636b', fontSize: 10 },
-  activeNavLabel: { color: '#211b32', fontWeight: '700' },
+  safeArea: {
+    flex: 1,
+    backgroundColor: '#ffffff',
+  },
+  scrollContainer: {
+    paddingBottom: 30,
+  },
+  headerContainer: {
+    backgroundColor: '#b9f227',
+    borderBottomLeftRadius: 36,
+    borderBottomRightRadius: 36,
+    paddingHorizontal: 20,
+    paddingTop: 12,
+    paddingBottom: 52,
+    position: 'relative',
+    overflow: 'hidden',
+  },
+
+  headerMainContent: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
+    position: 'relative',
+  },
+  greetingWrapper: {
+    flex: 1,
+    paddingRight: 10,
+    zIndex: 2,
+  },
+  greetingTitle: {
+    fontSize: 21,
+    fontWeight: '800',
+    color: '#121e02',
+    letterSpacing: -0.3,
+  },
+  subGreetingRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 2,
+  },
+  greetingSubtitle: {
+    fontSize: 19,
+    fontWeight: '800',
+    color: '#121e02',
+  },
+  heartIcon: {
+    marginLeft: 6,
+  },
+  tagline: {
+    fontSize: 11,
+    fontWeight: '600',
+    color: '#384b12',
+    marginTop: 6,
+  },
+  headerCornerImage: {
+    width: 175,
+    height: 120,
+    position: 'absolute',
+    right: -15,
+    top: -10,
+    zIndex: 1,
+  },
+
+  /* Search Bar Card Overlay */
+  searchCard: {
+    backgroundColor: '#ffffff',
+    marginHorizontal: 18,
+    marginTop: -32,
+    borderRadius: 24,
+    paddingVertical: 12,
+    paddingHorizontal: 14,
+    flexDirection: 'row',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.08,
+    shadowRadius: 14,
+    elevation: 6,
+    zIndex: 10,
+  },
+  searchLeftIcon: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: '#f1fada',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  searchTextContainer: {
+    flex: 1,
+    marginLeft: 12,
+  },
+  searchTitle: {
+    fontSize: 15,
+    fontWeight: '700',
+    color: '#1c212e',
+  },
+  searchSubTitle: {
+    fontSize: 11,
+    color: '#808b9e',
+    marginTop: 2,
+  },
+  searchArrowBtn: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: '#b9f227',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  /* Service Grid Section */
+  servicesGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    paddingHorizontal: 14,
+    marginTop: 22,
+    justifyContent: 'space-between',
+  },
+  serviceCard: {
+    width: (width - 28) / 4 - 8,
+    marginBottom: 20,
+    alignItems: 'flex-start',
+  },
+  iconBox: {
+    width: '100%',
+    aspectRatio: 1,
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'relative',
+    marginBottom: 8,
+  },
+  badgeContainer: {
+    position: 'absolute',
+    top: -5,
+    right: -4,
+    backgroundColor: '#ff3b30',
+    borderRadius: 10,
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    zIndex: 2,
+  },
+  badgeText: {
+    color: '#ffffff',
+    fontSize: 9,
+    fontWeight: '800',
+  },
+  serviceTitleRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '100%',
+  },
+  serviceLabel: {
+    fontSize: 13,
+    fontWeight: '700',
+    color: '#1a202c',
+    marginRight: 2,
+  },
+  serviceSubtitle: {
+    fontSize: 10,
+    color: '#8e99a8',
+    marginTop: 2,
+  },
+
+
 });
