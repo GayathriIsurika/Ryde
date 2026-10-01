@@ -1,25 +1,29 @@
 import * as Device from 'expo-device';
-import { StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, Image, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Spacing } from '@/constants/theme';
 import { router } from 'expo-router';
 
 export default function HomeScreen() {
   return (
-      <SafeAreaView style={styles.safeArea}>
+      <View style={styles.safeArea}>
         <Image
           source={require('@/assets/OnboardImage1.jpg')}
           style={styles.onboardimage}
         />
+        <View style={styles.logoContainer}>
         <Image
           source={require('@/assets/RydeLogo.png')}
           style={styles.image}
         />
-        <Text style={styles.title}>Your Ride, Just a Tap Away</Text>
-        <TouchableOpacity style={styles.button} onPress={() => router.push('/details')}>
-          <Text style={styles.buttonText}>Get Started</Text>
-        </TouchableOpacity>
-      </SafeAreaView>
+        
+          <Text style={styles.title}>Your Ride, Just a Tap Away</Text>
+        </View>
+          <TouchableOpacity style={styles.button} onPress={() => router.push('/details')}>
+            <Text style={styles.buttonText}>Get Started</Text>
+          </TouchableOpacity>
+        
+      </View>
   );
 }
 
@@ -28,6 +32,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     flexDirection: 'row',
+  },
+  logoContainer: {
+    alignItems: 'center',
+    borderTopRightRadius: 50,
+    borderTopLeftRadius: 50,
+    width: 359,
+    backgroundColor: 'white',
+    marginTop: -50,
   },
   safeArea: {
     flex: 1,
@@ -51,11 +63,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#c1f819',
     paddingVertical: 10,
     paddingHorizontal: 20,
-    marginTop: 20,
+    marginTop: 90,
   },
   buttonText: {
     color: 'black',
-    fontSize: 16,
+    fontSize: 20,
   },
   heroSection: {
     alignItems: 'center',
@@ -67,8 +79,7 @@ const styles = StyleSheet.create({
   title: {
     textAlign: 'center',
     fontSize: 25,
-    fontWeight: 'bold',
-    fontFamily: 'Inter_900Black',
+    fontFamily: 'NunitoSans_700Bold',
     marginTop: -20,
   },
   code: {
