@@ -38,7 +38,7 @@ export default function Details() {
         <TextInput placeholder="Email" style={styles.email} />
         <TextInput placeholder="Phone Number" style={styles.phone} />
       </View>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={() => router.push('/otp')}>
         <Text style={styles.buttontext}>Next</Text>
         <AntDesign name="arrow-right" size={24} color="black" />
       </TouchableOpacity>
