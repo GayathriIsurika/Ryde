@@ -1,95 +1,16 @@
-import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  TouchableOpacity,
-  Dimensions,
-  Image,
-} from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
+import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-const { width } = Dimensions.get('window');
-
-interface ServiceItem {
-  id: string;
-  label: string;
-  subtitle: string;
-  icon: keyof typeof Ionicons.glyphMap;
-  iconColor: string;
-  bgColor: string;
-  badge?: string;
-}
-
-const SERVICES: ServiceItem[] = [
-  {
-    id: 'rides',
-    label: 'Rides',
-    subtitle: 'Quick & Safe',
-    icon: 'car-sport',
-    iconColor: '#76ca00',
-    bgColor: '#f1fada',
-  },
-  {
-    id: 'food',
-    label: 'Food',
-    subtitle: 'Your Favourite Food',
-    icon: 'fast-food',
-    iconColor: '#00a389',
-    bgColor: '#e3f8f5',
-  },
-  {
-    id: 'market',
-    label: 'Market',
-    subtitle: 'Groceries & More',
-    icon: 'cart',
-    iconColor: '#5a4fce',
-    bgColor: '#eeedfe',
-  },
-  {
-    id: 'explore',
-    label: 'Explore',
-    subtitle: 'Places & Activities',
-    icon: 'calendar',
-    iconColor: '#2d804e',
-    bgColor: '#fff2e5',
-    badge: 'New',
-  },
-  {
-    id: 'rentals',
-    label: 'Rentals',
-    subtitle: 'Cars, Bikes & More',
-    icon: 'time',
-    iconColor: '#008080',
-    bgColor: '#e7f7f7',
-  },
-  {
-    id: 'delivery',
-    label: 'Delivery',
-    subtitle: 'Send Anything',
-    icon: 'cube',
-    iconColor: '#32a852',
-    bgColor: '#e5f8ec',
-    badge: 'Flash',
-  },
-  {
-    id: 'trucks',
-    label: 'Trucks',
-    subtitle: 'Heavy Loads',
-    icon: 'bus',
-    iconColor: '#177e89',
-    bgColor: '#ebf6f7',
-  },
-  {
-    id: 'scan',
-    label: "Scan N' Go",
-    subtitle: 'Scan & Ride/Order',
-    icon: 'scan',
-    iconColor: '#0f766e',
-    bgColor: '#e6f7f5',
-  },
+const services = [
+  { label: 'Rides', icon: 'car-sport' as const },
+  { label: 'Food', icon: 'fast-food' as const },
+  { label: 'Market', icon: 'cart' as const },
+  { label: 'Explore', icon: 'calendar' as const, badge: 'New' },
+  { label: 'Rentals', icon: 'time' as const },
+  { label: 'Delivery', icon: 'cube' as const, badge: 'Flash' },
+  { label: 'Trucks', icon: 'bus' as const },
+  { label: "Scan N' Go", icon: 'scan' as const },
 ];
 
 export default function HomeScreen() {
