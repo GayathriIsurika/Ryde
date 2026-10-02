@@ -1,16 +1,18 @@
 import { Ionicons } from '@expo/vector-icons';
-import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Dimensions, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+const { width } = Dimensions.get('window');
+
 const services = [
-  { label: 'Rides', icon: 'car-sport' as const },
-  { label: 'Food', icon: 'fast-food' as const },
-  { label: 'Market', icon: 'cart' as const },
-  { label: 'Explore', icon: 'calendar' as const, badge: 'New' },
-  { label: 'Rentals', icon: 'time' as const },
-  { label: 'Delivery', icon: 'cube' as const, badge: 'Flash' },
-  { label: 'Trucks', icon: 'bus' as const },
-  { label: "Scan N' Go", icon: 'scan' as const },
+  { id: 'rides', label: 'Rides', icon: 'car-sport' as const, bgColor: '#e6f9c2', iconColor: '#4ecb71', subtitle: 'Fast city rides', badge: undefined },
+  { id: 'food', label: 'Food', icon: 'fast-food' as const, bgColor: '#fff0d9', iconColor: '#ff9f43', subtitle: 'Your favorites', badge: undefined },
+  { id: 'market', label: 'Market', icon: 'cart' as const, bgColor: '#e3f2fd', iconColor: '#2f80ed', subtitle: 'Groceries & more', badge: undefined },
+  { id: 'explore', label: 'Explore', icon: 'calendar' as const, bgColor: '#f0ebff', iconColor: '#7b61ff', subtitle: 'Events & plans', badge: 'New' },
+  { id: 'rentals', label: 'Rentals', icon: 'time' as const, bgColor: '#e0f7fa', iconColor: '#00a7c4', subtitle: 'Hourly rentals', badge: undefined },
+  { id: 'delivery', label: 'Delivery', icon: 'cube' as const, bgColor: '#ffe6ec', iconColor: '#ef476f', subtitle: 'On-demand drop', badge: 'Flash' },
+  { id: 'trucks', label: 'Trucks', icon: 'bus' as const, bgColor: '#e8f5e9', iconColor: '#2e7d32', subtitle: 'Big cargo trips', badge: undefined },
+  { id: 'scan', label: "Scan N' Go", icon: 'scan' as const, bgColor: '#fff4d6', iconColor: '#f4b740', subtitle: 'Quick checkout', badge: undefined },
 ];
 
 export default function HomeScreen() {
@@ -62,7 +64,7 @@ export default function HomeScreen() {
 
         {/* Services Grid */}
         <View style={styles.servicesGrid}>
-          {SERVICES.map((item) => (
+          {services.map((item) => (
             <TouchableOpacity key={item.id} style={styles.serviceCard} activeOpacity={0.8}>
               <View style={[styles.iconBox, { backgroundColor: item.bgColor }]}>
                 {item.badge && (
