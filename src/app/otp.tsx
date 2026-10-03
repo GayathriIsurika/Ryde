@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
   verificationPanel: {
     marginHorizontal: -24,
     paddingHorizontal: 24,
-    paddingTop: 36,
+    paddingTop: 20,
     paddingBottom: 40,
     backgroundColor: '#c1f819',
     borderBottomLeftRadius: 50,
