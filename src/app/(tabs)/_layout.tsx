@@ -17,10 +17,21 @@ export default function TabLayout() {
       {/* 1. Home Tab (app/(tabs)/index.tsx) */}
       <Tabs.Screen
         name="index"
-        options={{
+        options={{ 
           title: 'Home',
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="home" size={25} color={color} />
+          ),
+        }}
+      />
+
+      {/* 1. Activites Tab (app/(tabs)/activites.tsx) */}
+      <Tabs.Screen
+        name="activites"
+        options={{ 
+          title: 'Activites',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="list-outline" size={25} color={color} />
           ),
         }}
       />
