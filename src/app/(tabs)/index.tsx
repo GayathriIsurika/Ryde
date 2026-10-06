@@ -1,18 +1,87 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Dimensions, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import LottieView from 'lottie-react-native';
 
 const { width } = Dimensions.get('window');
 
 const services = [
-  { id: 'rides', label: 'Rides', icon: 'car-sport' as const, bgColor: '#e6f9c2', iconColor: '#4ecb71', subtitle: 'Fast city rides', badge: undefined },
-  { id: 'food', label: 'Food', icon: 'fast-food' as const, bgColor: '#fff0d9', iconColor: '#ff9f43', subtitle: 'Your favorites', badge: undefined },
-  { id: 'market', label: 'Market', icon: 'cart' as const, bgColor: '#e3f2fd', iconColor: '#2f80ed', subtitle: 'Groceries & more', badge: undefined },
-  { id: 'explore', label: 'Explore', icon: 'calendar' as const, bgColor: '#f0ebff', iconColor: '#7b61ff', subtitle: 'Events & plans', badge: 'New' },
-  { id: 'rentals', label: 'Rentals', icon: 'time' as const, bgColor: '#e0f7fa', iconColor: '#00a7c4', subtitle: 'Hourly rentals', badge: undefined },
-  { id: 'delivery', label: 'Delivery', icon: 'cube' as const, bgColor: '#ffe6ec', iconColor: '#ef476f', subtitle: 'On-demand drop', badge: 'Flash' },
-  { id: 'trucks', label: 'Trucks', icon: 'bus' as const, bgColor: '#e8f5e9', iconColor: '#2e7d32', subtitle: 'Big cargo trips', badge: undefined },
-  { id: 'scan', label: "Scan N' Go", icon: 'scan' as const, bgColor: '#fff4d6', iconColor: '#f4b740', subtitle: 'Quick checkout', badge: undefined },
+  {
+    id: 'rides',
+    label: 'Rides',
+    lottie: require('@/assets/lottie/car.json'),
+    bgColor: '#e6f9c2',
+    subtitle: 'Fast city rides',
+    iconWidth: 90,  
+    iconHeight: 90,
+  },
+  {
+    id: 'food',
+    label: 'Food',
+    lottie: require('@/assets/lottie/food.json'),
+    bgColor: '#fff0d9',
+    subtitle: 'Your favorites',
+    iconWidth: 70,  
+    iconHeight: 70,
+    
+  },
+  {
+    id: 'market',
+    label: 'Market',
+    lottie: require('@/assets/lottie/cart.json'),
+    bgColor: '#e3f2fd',
+    subtitle: 'Groceries & more',
+   
+  },
+  {
+    id: 'explore',
+    label: 'Explore',
+    lottie: require('@/assets/lottie/calendar.json'),
+    bgColor: '#f0ebff',
+    subtitle: 'Events & plans',
+    iconWidth: 130,  
+    iconHeight: 130,
+   
+  },
+  {
+    id: 'rentals',
+    label: 'Rentals',
+    lottie: require('@/assets/lottie/time.json'),
+    bgColor: '#e0f7fa',
+    subtitle: 'Hourly rentals',
+    iconWidth: 60,  
+    iconHeight: 60,
+  },
+  {
+    id: 'delivery',
+    label: 'Delivery',
+    lottie: require('@/assets/lottie/delivery.json'),
+    bgColor: '#ffe6ec',
+    subtitle: 'On-demand drop',
+    badge: 'Flash',
+    iconWidth: 60,  
+    iconHeight:60,
+  },
+
+{
+    id: 'trucks',
+    label: 'Trucks',
+    lottie: require('@/assets/lottie/truck.json'),
+    bgColor: '#e8f5e9',
+    subtitle: 'Big cargo trips',
+  
+  },
+  {
+    id: 'scan',
+    label: "Scan N' Go",
+    lottie: require('@/assets/lottie/scan.json'),
+    bgColor: '#fff4d6',
+    subtitle: 'Quick checkout',
+    iconWidth: 60,  
+    iconHeight: 60,
+    
+  },
+  
 ];
 
 export default function HomeScreen() {
@@ -32,7 +101,7 @@ export default function HomeScreen() {
               <View>
                 <Ionicons name="sunny-outline" size={20} color="#1c2a05" />
               </View>
-              <Text style={styles.greetingTitle}>Hi Gayathri Isurika,</Text>
+              <Text style={styles.greetingTitle}>Hi User,</Text>
               <View style={styles.subGreetingRow}>
                 <Text style={styles.greetingSubtitle}>Good Morning!</Text>
               </View>
@@ -63,17 +132,23 @@ export default function HomeScreen() {
         </View>
 
         {/* Services Grid */}
-        <View style={styles.servicesGrid}>
-          {services.map((item) => (
-            <TouchableOpacity key={item.id} style={styles.serviceCard} activeOpacity={0.8}>
-              <View style={[styles.iconBox, { backgroundColor: item.bgColor }]}>
-                {item.badge && (
-                  <View style={styles.badgeContainer}>
-                    <Text style={styles.badgeText}>{item.badge}</Text>
-                  </View>
-                )}
-                <Ionicons name={item.icon} size={32} color={item.iconColor} />
-              </View>
+      <View style={styles.servicesGrid}>
+  {services.map((item) => (
+    <TouchableOpacity key={item.id} style={styles.serviceCard} activeOpacity={0.8}>
+      <View style={[styles.iconBox, { backgroundColor: item.bgColor }]}>
+
+        {/* Dynamic size applied directly from item properties */}
+        <LottieView
+          source={item.lottie}
+          autoPlay
+          loop
+          resizeMode="contain"
+          style={{
+            width: item.iconWidth ?? 44,
+            height: item.iconHeight ?? 44,
+          }}
+        />
+      </View>
 
               <View style={styles.serviceTitleRow}>
                 <Text style={styles.serviceLabel} numberOfLines={1}>
@@ -227,16 +302,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     position: 'relative',
     marginBottom: 8,
-  },
-  badgeContainer: {
-    position: 'absolute',
-    top: -5,
-    right: -4,
-    backgroundColor: '#ff3b30',
-    borderRadius: 10,
-    paddingHorizontal: 6,
-    paddingVertical: 2,
-    zIndex: 2,
+    overflow: 'hidden',
   },
   badgeText: {
     color: '#ffffff',
