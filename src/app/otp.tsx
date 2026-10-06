@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   resendRow: { flexDirection: 'row', justifyContent: 'center', marginTop: 28 },
   resendText: { color: '#666', fontSize: 14 },
   resendLink: { color: '#111', fontWeight: '700', fontSize: 14 },
-  button: { height: 52, borderRadius: 20, backgroundColor: '#c1f819', alignItems: 'center', justifyContent: 'center', marginTop: 40 },
+  button: { height: 52, borderRadius: 20, backgroundColor: '#c1f819', alignItems: 'center', justifyContent: 'center', marginTop: 40, borderColor: "#c1f819", shadowColor: "#000", shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.25, shadowRadius: 3.84, elevation: 5, },
   disabledButton: { opacity: 0.5 },
   buttonText: { color: '#111', fontSize: 16, fontWeight: '600' },
 });
