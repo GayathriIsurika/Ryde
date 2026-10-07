@@ -72,7 +72,6 @@ export default function OtpScreen() {
           accessibilityRole="button"
         >
           <Text style={styles.buttonText}>Verify</Text>
-          <AntDesign name="arrow-right" size={24} color="black" />
         </TouchableOpacity>
       </View>
     </SafeAreaView>

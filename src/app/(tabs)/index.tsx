@@ -1,7 +1,9 @@
+import { Link } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { Dimensions, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import LottieView from 'lottie-react-native';
+import { router } from 'expo-router';
 
 const { width } = Dimensions.get('window');
 
@@ -118,7 +120,8 @@ export default function HomeScreen() {
         </View>
 
         {/* Floating Search Bar */}
-        <View style={styles.searchCard}>
+        <TouchableOpacity style={styles.searchCard}
+        activeOpacity={0.9} onPress={()=> router.push('/search')}>
           <View style={styles.searchLeftIcon}>
             <Ionicons name="location" size={22} color="#76ca00" />
           </View>
@@ -126,29 +129,33 @@ export default function HomeScreen() {
             <Text style={styles.searchTitle}>Where are you going?</Text>
             <Text style={styles.searchSubTitle}>Set your pickup and drop location</Text>
           </View>
-          <TouchableOpacity style={styles.searchArrowBtn} activeOpacity={0.85}>
+          <View style={styles.searchArrowBtn} >
             <Ionicons name="arrow-forward" size={20} color="#1c2a05" />
-          </TouchableOpacity>
-        </View>
+          </View>
+        </TouchableOpacity>
 
         {/* Services Grid */}
       <View style={styles.servicesGrid}>
-  {services.map((item) => (
-    <TouchableOpacity key={item.id} style={styles.serviceCard} activeOpacity={0.8}>
-      <View style={[styles.iconBox, { backgroundColor: item.bgColor }]}>
-
-        {/* Dynamic size applied directly from item properties */}
-        <LottieView
-          source={item.lottie}
-          autoPlay
-          loop
-          resizeMode="contain"
-          style={{
-            width: item.iconWidth ?? 44,
-            height: item.iconHeight ?? 44,
-          }}
-        />
-      </View>
+        {services.map((item) => (
+          <Link
+            key={item.id}
+            href={{ pathname: '/service/[service]', params: { service: item.id } }}
+            asChild
+          >
+            <TouchableOpacity style={styles.serviceCard} activeOpacity={0.8}>
+              <View style={[styles.iconBox, { backgroundColor: item.bgColor }]}>
+                {/* Dynamic size applied directly from item properties */}
+                <LottieView
+                  source={item.lottie}
+                  autoPlay
+                  loop
+                  resizeMode="contain"
+                  style={{
+                    width: item.iconWidth ?? 44,
+                    height: item.iconHeight ?? 44,
+                  }}
+                />
+              </View>
 
               <View style={styles.serviceTitleRow}>
                 <Text style={styles.serviceLabel} numberOfLines={1}>
@@ -161,8 +168,9 @@ export default function HomeScreen() {
                 {item.subtitle}
               </Text>
             </TouchableOpacity>
-          ))}
-        </View>
+          </Link>
+        ))}
+      </View>
 
       </ScrollView>
     </SafeAreaView>
