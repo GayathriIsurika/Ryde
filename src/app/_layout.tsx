@@ -27,6 +27,7 @@ export default function RootLayout() {
         <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="details" options={{ title: 'Details' }} />
         <Stack.Screen name="otp" options={{ title: 'Verification' }} />
+        <Stack.Screen name="settings" options={{ title: 'Settings' }} />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       </Stack>
 
