@@ -1,22 +1,67 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import NameEditModal from '../components/nameeditmodal';
+import PhoneEditModal from '../components/phoneeditmodal';
+import EmailEditModal from '../components/emaileditmodal';
+import Entypo from '@expo/vector-icons/Entypo';
 
 export default function AccountSettings() {
+
+  const [modalVisible, setModalVisible] = useState(false);
+  const [phoneModalVisible, setPhoneModalVisible] = useState(false);
+  const [emailModalVisible, setEmailModalVisible] = useState(false);
+
+  const handleEditName = () => {
+    setModalVisible(false);
+    // your name edit logic here
+  };
+
+  const handleEditPhone = () => {
+    setPhoneModalVisible(false);
+    // your phone edit logic here
+  };
+
+  const handleEditEmail = () => {
+    setEmailModalVisible(false);
+    // your email edit logic here
+  };
+
+  
   return (
     <View style = {styles.view}>
-        <View>
+        <TouchableOpacity>
             <MaterialIcons name="account-circle" size={150} color="black" marginTop={40}/>
-        </View>
-        <TouchableOpacity style={styles.name}>
+        </TouchableOpacity>
+        <TouchableOpacity >
+          <View style={styles.camera}>
+            <Entypo name="camera" size={24} color="black" />
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.name} onPress={() => setModalVisible(true)}>
             <Text style={styles.nameTitleText}>Name</Text>
             <Text style={styles.nameEnterText}>Gayathri Isurika</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.phone}>
+        <NameEditModal
+          visible={modalVisible}
+          onClose={() => setModalVisible(false)}
+          onConfirm={handleEditName}
+        />
+        <PhoneEditModal
+          visible={phoneModalVisible}
+          onClose={() => setPhoneModalVisible(false)}
+          onConfirm={handleEditPhone}
+        />
+        <TouchableOpacity style={styles.phone} onPress={() => setPhoneModalVisible(true)}>
             <Text style={styles.phoneTitleText}>Mobile</Text>
             <Text style={styles.phoneEnterText}>+94 77 123 4567</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.email}>
+        <EmailEditModal
+          visible={emailModalVisible}
+          onClose={() => setEmailModalVisible(false)}
+          onConfirm={handleEditEmail}
+        />
+        <TouchableOpacity style={styles.email} onPress={() => setEmailModalVisible(true)}>
             <Text style={styles.emailTitleText}>Email</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.save}>
@@ -30,6 +75,19 @@ const styles = StyleSheet.create({
     view: {
         flex: 1,
         alignItems: 'center',
+    },
+    camera: {
+      position: 'absolute',
+      borderWidth: 1,
+      borderColor: 'white',
+      borderRadius: 50,
+      width: 40,
+      height: 40,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: 'white',
+      top: -60,
+      left: 20,
     },
     name: {
     borderWidth: 1,
