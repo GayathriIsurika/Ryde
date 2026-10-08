@@ -13,7 +13,7 @@ export default function Settings() {
         </View>
         <TouchableOpacity style={styles.name}>
             <Text style={styles.nameTitleText}>Name</Text>
-            <Text style={styles.nameEnterText}>Gayathri Isurika</Text>
+            <Text style={styles.nameEnterText}>User</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.phone}>
             <Text style={styles.phoneTitleText}>Mobile</Text>
