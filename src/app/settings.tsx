@@ -11,7 +11,7 @@ export default function Settings() {
             <MaterialIcons name="manage-accounts" size={24} color="black" />
             <Text style={styles.accountText}>Account</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.advancedsettings}>
+        <TouchableOpacity style={styles.advancedsettings} onPress={() => router.push('/advancedsettings')}>
             <Feather name="tool" size={24} color="black" />
             <Text style={styles.advancedsettingsText}>Advanced Settings</Text>
         </TouchableOpacity>
