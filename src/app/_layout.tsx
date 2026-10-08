@@ -28,6 +28,8 @@ export default function RootLayout() {
         <Stack.Screen name="details" options={{ title: 'Details' }} />
         <Stack.Screen name="otp" options={{ title: 'Verification' }} />
         <Stack.Screen name="settings" options={{ title: 'Settings' }} />
+        <Stack.Screen name="advancedsettings" options={{ title: 'Advanced Settings' }} />
+        <Stack.Screen name="accountsettings" options={{ title: 'Account Settings' }} />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       </Stack>
 
