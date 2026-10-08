@@ -10,7 +10,7 @@ export default function AccountScreen() {
   return (
     <View style={styles.container}>
       <MaterialIcons name="account-circle" size={150} color="black" marginTop={50}/>
-      <Text style={styles.name}>Gayathri Isurika</Text>
+      <Text style={styles.name}>User</Text>
       <View style={styles.buttoncontainer}>
           <TouchableOpacity style={styles.help}>
             <Feather name="help-circle" size={24} color="black" marginLeft={10} />
@@ -47,7 +47,7 @@ export default function AccountScreen() {
               marginLeft={130}
             />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.aboutus}>
+          <TouchableOpacity style={styles.aboutus} onPress={()=> router.push('/aboutus')}>
             <AntDesign name="info-circle" size={24} color="black" marginLeft={10} />
             <Text style={styles.aboutusText}>About Us</Text>
             <FontAwesome

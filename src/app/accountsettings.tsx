@@ -40,7 +40,7 @@ export default function AccountSettings() {
         </TouchableOpacity>
         <TouchableOpacity style={styles.name} onPress={() => setModalVisible(true)}>
             <Text style={styles.nameTitleText}>Name</Text>
-            <Text style={styles.nameEnterText}>Gayathri Isurika</Text>
+            <Text style={styles.nameEnterText}>User</Text>
         </TouchableOpacity>
         <NameEditModal
           visible={modalVisible}
