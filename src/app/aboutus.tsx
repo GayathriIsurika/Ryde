@@ -27,7 +27,7 @@ export default function AboutUsScreen() {
     style={styles.logoImage} 
     resizeMode="contain"
   />
-          <Text style={styles.appName}>Ryde</Text>
+        
           <Text style={styles.appVersion}>Version 1.0.0</Text>
         </View>
 
@@ -118,13 +118,8 @@ const styles = StyleSheet.create({
  logoImage: {
     width: 100,
     height: 100,
-    borderRadius: 20, // Optional: if you want rounded corners
+    borderRadius: 20, 
     marginBottom: 12,
-  },
-  appName: {
-    fontSize: 24,
-    fontWeight: '800',
-    color: '#1a202c',
   },
   appVersion: {
     fontSize: 14,
